@@ -1,4 +1,4 @@
-﻿{{- if .Values.ingress.enabled }}
+{{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -7,11 +7,19 @@ metadata:
     alb.ingress.kubernetes.io/scheme: {{ .Values.ingress.scheme | quote }}
     alb.ingress.kubernetes.io/target-type: {{ .Values.ingress.targetType | quote }}
     alb.ingress.kubernetes.io/healthcheck-path: /health
+    alb.ingress.kubernetes.io/actions.block-metrics: '{"type":"fixed-response","fixedResponseConfig":{"contentType":"text/plain","statusCode":"404","messageBody":"Not Found"}}'
 spec:
   ingressClassName: alb
   rules:
     - http:
         paths:
+          - path: /metrics
+            pathType: Exact
+            backend:
+              service:
+                name: block-metrics
+                port:
+                  name: use-annotation
           - path: /
             pathType: Prefix
             backend:
