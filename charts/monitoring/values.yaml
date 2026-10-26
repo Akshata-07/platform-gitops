@@ -38,13 +38,6 @@ kube-prometheus-stack:
 
   grafana:
     replicas: 1
-    resources:
-      requests:
-        cpu: 50m
-        memory: 128Mi
-      limits:
-        cpu: 300m
-        memory: 384Mi
     nodeSelector:
       workload: observability
     tolerations:
@@ -52,9 +45,25 @@ kube-prometheus-stack:
         operator: Equal
         value: observability
         effect: NoSchedule
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 300m
+        memory: 384Mi
+    
 
   prometheusOperator:
     admissionWebhooks:
+      create:
+        nodeSelector:
+          workload: observability
+        tolerations:
+          - key: dedicated
+            operator: Equal
+            value: observability
+            effect: NoSchedule
       patch:
         nodeSelector:
           workload: observability
