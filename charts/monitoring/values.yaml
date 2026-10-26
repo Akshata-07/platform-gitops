@@ -1,0 +1,69 @@
+prometheus:
+  prometheusSpec:
+    replicas: 1
+    retention: 3d
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
+    nodeSelector:
+      workload: observability
+    tolerations:
+      - key: dedicated
+        operator: Equal
+        value: observability
+        effect: NoSchedule
+
+alertmanager:
+  alertmanagerSpec:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 25m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+    nodeSelector:
+      workload: observability
+    tolerations:
+      - key: dedicated
+        operator: Equal
+        value: observability
+        effect: NoSchedule
+
+grafana:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 384Mi
+  nodeSelector:
+    workload: observability
+  tolerations:
+    - key: dedicated
+      operator: Equal
+      value: observability
+      effect: NoSchedule
+
+prometheusOperator:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 384Mi
+  nodeSelector:
+    workload: observability
+  tolerations:
+    - key: dedicated
+      operator: Equal
+      value: observability
+      effect: NoSchedule
