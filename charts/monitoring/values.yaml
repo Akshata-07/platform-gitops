@@ -33,6 +33,11 @@ kube-prometheus-stack:
       limits:
         cpu: 300m
         memory: 384Mi
+    tolerations:
+      - key: dedicated
+        operator: Equal
+        value: observability
+        effect: NoSchedule
 
   prometheusOperator:
     resources:
