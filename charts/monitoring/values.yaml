@@ -10,13 +10,6 @@ kube-prometheus-stack:
         limits:
           cpu: 500m
           memory: 1Gi
-      nodeSelector:
-        workload: observability
-      tolerations:
-        - key: dedicated
-          operator: Equal
-          value: observability
-          effect: NoSchedule
 
   alertmanager:
     alertmanagerSpec:
@@ -28,23 +21,9 @@ kube-prometheus-stack:
         limits:
           cpu: 200m
           memory: 256Mi
-      nodeSelector:
-        workload: observability
-      tolerations:
-        - key: dedicated
-          operator: Equal
-          value: observability
-          effect: NoSchedule
 
   grafana:
     replicas: 1
-    nodeSelector:
-      workload: observability
-    tolerations:
-      - key: dedicated
-        operator: Equal
-        value: observability
-        effect: NoSchedule
     resources:
       requests:
         cpu: 50m
@@ -52,26 +31,8 @@ kube-prometheus-stack:
       limits:
         cpu: 300m
         memory: 384Mi
-    
 
   prometheusOperator:
-    admissionWebhooks:
-      create:
-        nodeSelector:
-          workload: observability
-        tolerations:
-          - key: dedicated
-            operator: Equal
-            value: observability
-            effect: NoSchedule
-      patch:
-        nodeSelector:
-          workload: observability
-        tolerations:
-          - key: dedicated
-            operator: Equal
-            value: observability
-            effect: NoSchedule
     resources:
       requests:
         cpu: 50m
@@ -79,10 +40,3 @@ kube-prometheus-stack:
       limits:
         cpu: 300m
         memory: 384Mi
-    nodeSelector:
-      workload: observability
-    tolerations:
-      - key: dedicated
-        operator: Equal
-        value: observability
-        effect: NoSchedule
