@@ -24,7 +24,7 @@ kube-prometheus-stack:
 
   grafana:
     deploymentStrategy:
-      type: Recreate
+      type: RollingUpdate
     replicas: 1
     resources:
       requests:
