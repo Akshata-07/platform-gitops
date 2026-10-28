@@ -23,6 +23,8 @@ kube-prometheus-stack:
           memory: 256Mi
 
   grafana:
+    deploymentStrategy:
+      type: Recreate
     replicas: 1
     resources:
       requests:
