@@ -40,6 +40,9 @@ kube-prometheus-stack:
         effect: NoSchedule
 
   prometheusOperator:
+    admissionWebhooks:
+      patch:
+        ttlSecondsAfterFinished: 3600
     resources:
       requests:
         cpu: 50m
