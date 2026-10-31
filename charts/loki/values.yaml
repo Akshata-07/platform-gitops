@@ -33,7 +33,12 @@ loki:
     persistence:
       enabled: true
       size: 10Gi
-      storageClass: gp2
+      storageClass: loki-gp3
+    tolerations:
+      - key: dedicated
+        operator: Equal
+        value: observability
+        effect: NoSchedule
 
   gateway:
     enabled: false
@@ -42,4 +47,10 @@ loki:
     enabled: false
 
   resultsCache:
+    enabled: false
+
+  lokiCanary:
+    enabled: false
+  
+  test:
     enabled: false
