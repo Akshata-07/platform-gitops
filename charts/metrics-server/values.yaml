@@ -1,0 +1,8 @@
+metrics-server:
+  nodeSelector:
+    workload: observability
+  tolerations:
+    - key: dedicated
+      operator: Equal
+      value: observability
+      effect: NoSchedule
