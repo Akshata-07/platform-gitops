@@ -1,4 +1,4 @@
-kube-prometheus-stack:
+﻿kube-prometheus-stack:
   prometheus:
     prometheusSpec:
       replicas: 1
@@ -10,6 +10,11 @@ kube-prometheus-stack:
         limits:
           cpu: 500m
           memory: 1Gi
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: observability
+          effect: NoSchedule
 
   alertmanager:
     alertmanagerSpec:
@@ -47,6 +52,11 @@ kube-prometheus-stack:
     admissionWebhooks:
       patch:
         ttlSecondsAfterFinished: 3600
+        tolerations:
+          - key: dedicated
+            operator: Equal
+            value: observability
+            effect: NoSchedule
     resources:
       requests:
         cpu: 50m
