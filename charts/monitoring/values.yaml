@@ -82,7 +82,7 @@
         value: observability
         effect: NoSchedule
 
-  kubeStateMetrics:
+  kube-state-metrics:
     tolerations:
       - key: dedicated
         operator: Equal
