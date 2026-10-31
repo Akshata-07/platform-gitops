@@ -26,6 +26,11 @@
         limits:
           cpu: 200m
           memory: 256Mi
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: observability
+          effect: NoSchedule
 
   grafana:
     deploymentStrategy:
@@ -71,3 +76,15 @@
       limits:
         cpu: 300m
         memory: 384Mi
+    tolerations:
+      - key: dedicated
+        operator: Equal
+        value: observability
+        effect: NoSchedule
+
+  kubeStateMetrics:
+    tolerations:
+      - key: dedicated
+        operator: Equal
+        value: observability
+        effect: NoSchedule
