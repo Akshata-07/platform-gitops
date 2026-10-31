@@ -4,6 +4,7 @@ metadata:
   name: monitoring-grafana
   namespace: monitoring
   annotations:
+    alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/group.name: devops-portfolio
     alb.ingress.kubernetes.io/healthcheck-path: /grafana/api/health
 spec:
