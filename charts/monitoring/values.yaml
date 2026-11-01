@@ -52,6 +52,9 @@
       server:
         root_url: "%(protocol)s://%(domain)s/grafana/"
         serve_from_sub_path: true
+    serviceMonitor:
+      enabled: true
+      path: /grafana/metrics
     additionalDataSources:
       - name: Loki
         type: loki
