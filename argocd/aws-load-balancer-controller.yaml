@@ -1,3 +1,4 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -5,13 +6,37 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
     repoURL: https://github.com/Akshata-07/platform-gitops.git
     targetRevision: main
     path: charts/aws-load-balancer-controller
+
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
+
+  ignoreDifferences:
+    - kind: Secret
+      name: aws-load-balancer-tls
+      jqPathExpressions:
+        - .data["ca.crt"]
+        - .data["tls.crt"]
+        - .data["tls.key"]
+
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      name: aws-load-balancer-webhook
+      jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
+
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      name: aws-load-balancer-webhook
+      jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
+
   syncPolicy:
     syncOptions:
       - CreateNamespace=false
+      - RespectIgnoreDifferences=true
