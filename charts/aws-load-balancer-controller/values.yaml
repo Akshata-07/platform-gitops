@@ -1,7 +1,6 @@
 aws-load-balancer-controller:
   clusterName: devops-portfolio-eks
   region: ap-south-1
-  vpcId: vpc-001d269303742ceb0
 
   replicaCount: 2
 
