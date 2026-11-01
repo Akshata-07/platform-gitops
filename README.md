@@ -86,6 +86,8 @@ Six Argo CD Applications manage the platform components:
 
 Each Application points to the corresponding configuration in this GitOps repository.
 
+![Argo CD Applications](./assets/04-argocd-all-applications.png)
+
 ## Application Deployment
 
 The FastAPI application is packaged as a Helm chart:
@@ -136,6 +138,8 @@ The Prometheus and Loki data sources are configured for querying monitoring data
 
 Grafana is exposed through the `/grafana/` path of the platform's load balancer endpoint.
 
+![Grafana Node Monitoring](./assets/06-grafana-node-monitoring.png)
+
 ## Centralized Logging
 
 The logging pipeline uses Alloy and Loki.
@@ -150,6 +154,8 @@ Example LogQL query:
 ```logql
 {namespace="monitoring"}
 ```
+
+![Loki Application Logs](./assets/07-grafana-loki-application-logs.png)
 
 ## Storage Configuration
 
