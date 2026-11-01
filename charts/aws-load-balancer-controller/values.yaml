@@ -1,0 +1,12 @@
+aws-load-balancer-controller:
+  clusterName: devops-portfolio-eks
+  region: ap-south-1
+  vpcId: vpc-001d269303742ceb0
+
+  replicaCount: 2
+
+  serviceAccount:
+    create: true
+    name: aws-load-balancer-controller
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::390663896997:role/devops-portfolio-load-balancer-controller
